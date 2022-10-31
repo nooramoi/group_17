@@ -32,7 +32,7 @@ Yksi ryhmän opiskelijoista alustaa GitHub-repositoryn seuraavasti
     </li>
     <li>Suorittaa kansion group_x juuressa komennot 
         <ul>
-            <li>git add.</li>
+            <li>git add .</li>
             <li>git commit -m "projekti alustettu"</li>
             <li>git push origin initialize</li>
         </ul>
