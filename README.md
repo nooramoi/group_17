@@ -69,3 +69,15 @@ Ja sitten tarkempi versio
 <br><img src="er_kaavio_2.PNG" alt="" width="600"> <br>
 Ja lopullinen versio
 <br> <img src="final_er.png" width="600"> <br>
+
+## WebToken
+
+Loginin siis tulee antaa onnistuneen kirjautumisen jälkeen webtoken.
+Ja se toteutetaan seuraavasti. Anna backend-kansiossa komennot 
+<pre>
+npm install dotenv
+npm install co
+npm install jsonwebtoken
+</pre>
+Katso ohjeet sivulta https://peatutor.com/express/Examples/webtoken.php
+

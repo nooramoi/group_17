@@ -28,6 +28,10 @@ const student = {
                 [update_data.fname, update_data.lname, hashedPassword, id],
                 callback);
         });
+    },
+    checkPassword: function(id_student,callback){
+        return db.query('select password from student where id_student=?',[id_student],callback);
     }
+    
 };
 module.exports = student;
