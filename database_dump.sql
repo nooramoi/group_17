@@ -29,7 +29,7 @@ CREATE TABLE `course` (
   `name` varchar(50) DEFAULT NULL,
   `ects` smallint DEFAULT NULL,
   PRIMARY KEY (`id_course`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES (1,'C++',5),(2,'C#',3);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,12 +54,13 @@ CREATE TABLE `grade` (
   `grade_date` date DEFAULT NULL,
   `id_student` char(4) DEFAULT NULL,
   `id_course` int DEFAULT NULL,
+  `grade` smallint DEFAULT NULL,
   PRIMARY KEY (`id_grade`),
   KEY `student_grade_idx` (`id_student`),
   KEY `course_grade_idx` (`id_course`),
   CONSTRAINT `course_grade` FOREIGN KEY (`id_course`) REFERENCES `course` (`id_course`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `student_grade` FOREIGN KEY (`id_student`) REFERENCES `student` (`id_student`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +69,7 @@ CREATE TABLE `grade` (
 
 LOCK TABLES `grade` WRITE;
 /*!40000 ALTER TABLE `grade` DISABLE KEYS */;
+INSERT INTO `grade` VALUES (1,'2022-10-31','a102',2,4),(4,'2022-11-01','a102',1,3);
 /*!40000 ALTER TABLE `grade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,6 +95,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES ('a101','Teppo','Testi','$2a$10$cftJsi94op/Zkj6yySq/.ObDX2R4CsNPlWe2lueL3HTn9/v2T9QG.'),('a102','Maija','Virta','$2a$10$HUafjDBkZ2TP27bQBzLttuK8LFSj3ZsGbBMvoWjGApeUW8lXcniAi');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +108,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-31 18:32:40
+-- Dump completed on 2022-11-01 18:21:58
