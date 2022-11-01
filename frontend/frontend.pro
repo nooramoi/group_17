@@ -12,10 +12,12 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    myurl.cpp \
     studentwindow.cpp
 
 HEADERS += \
     mainwindow.h \
+    myurl.h \
     studentwindow.h
 
 FORMS += \

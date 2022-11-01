@@ -31,6 +31,42 @@
     <string>TextLabel</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="btnGrades">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>80</y>
+     <width>191</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Arvosanat</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnMyData">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>80</y>
+     <width>191</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Tietoni</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

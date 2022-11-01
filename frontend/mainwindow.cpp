@@ -24,7 +24,7 @@ void MainWindow::on_btnLogin_clicked()
     jsonObj.insert("id_student",id_student);
     jsonObj.insert("password",password);
 
-    QString site_url="http://localhost:3000/login";
+    QString site_url=MyUrl::getBaseUrl()+"/login";
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
@@ -41,15 +41,17 @@ void MainWindow::loginSlot(QNetworkReply *reply)
 {
     response_data=reply->readAll();
     qDebug()<<response_data;
-    /*
-    if(id_student.length()==4){
-        objectStudentWindow=new StudentWindow(id_student);
-        objectStudentWindow->show();
-    }
-    else {
+    int test=QString::compare(response_data,"false");
+    qDebug()<<test;
+    if(test==0){
         ui->textIdStudent->clear();
         ui->textPassword->clear();
         ui->labelInfo->setText("Tunnus ja salasana eivät täsmää");
-    }*/
+    }
+    else {
+        objectStudentWindow=new StudentWindow(id_student);
+        objectStudentWindow->setWebToken(response_data);
+        objectStudentWindow->show();
+    }
 }
 

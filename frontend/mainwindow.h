@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "studentwindow.h"
+#include "myurl.h"
 
 #include <QMainWindow>
 #include <QtNetwork>
