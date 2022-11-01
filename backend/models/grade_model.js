@@ -3,10 +3,10 @@ const db = require('../database');
 
 const grade = {
     getById: function (id, callback) {
-        return db.query('select * from grade where id_grade=?', [id], callback);
+        return db.query('select id_grade, date_format(grade_date,"%d.%m.%Y") as "grade_date",id_student, id_course, grade from grade  where id_grade=?', [id], callback);
     },
     getAll: function (callback) {
-        return db.query('select * from grade', callback);
+        return db.query('select id_grade, date_format(grade_date,"%d.%m.%Y") as "grade_date",id_student, id_course, grade from grade', callback);
     },
     add: function (add_data, callback) {
         return db.query(

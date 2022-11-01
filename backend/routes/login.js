@@ -10,8 +10,6 @@ router.post('/',
     if(request.body.id_student && request.body.password){
       const id_student = request.body.id_student;
       const password = request.body.password;
-      console.log(id_student);
-      console.log(password);
         student.checkPassword(id_student, function(dbError, dbResult) {
           if(dbError){
             response.json(dbError);
