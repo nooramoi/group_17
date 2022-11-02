@@ -10,7 +10,4 @@ select name, ects,grade, date_format(grade_date,"%d.%m.%Y") as "grade_date", fna
 from course inner join grade on course.id_course=grade.id_course 
 inner join student on student.id_student=grade.id_student;
 
-select name, ects,grade, date_format(grade_date,"%d.%m.%Y") as "grade_date"
-from course inner join grade on course.id_course=grade.id_course 
-inner join student on student.id_student=grade.id_student 
-where student.id_student="a102";
+select name, ects,grade, date_format(grade_date,"%d.%m.%Y") as "grade_date" from course inner join grade on course.id_course=grade.id_course inner join student on student.id_student=grade.id_student where student.id_student="a102";

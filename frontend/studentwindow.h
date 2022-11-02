@@ -2,6 +2,9 @@
 #define STUDENTWINDOW_H
 
 #include <QDialog>
+#include <QtNetwork>
+#include <QNetworkAccessManager>
+#include <QJsonDocument>
 
 namespace Ui {
 class StudentWindow;
@@ -16,14 +19,26 @@ public:
     ~StudentWindow();
 
     const QString &getWebToken() const;
-    void setWebToken(const QString &newWebToken);
+
+
+    void setWebToken(const QByteArray &newWebToken);
 
 private slots:
     void on_btnGrades_clicked();
+    void gradeSlot (QNetworkReply *reply);
+    void dataSlot (QNetworkReply *reply);
+
+    void on_btnMyData_clicked();
 
 private:
     Ui::StudentWindow *ui;
-    QString webToken;
+    QByteArray webToken;
+    QString myStudentId;
+
+    QNetworkAccessManager *gradeManager;
+    QNetworkAccessManager *dataManager;
+    QNetworkReply *reply;
+    QByteArray response_data;
 };
 
 #endif // STUDENTWINDOW_H

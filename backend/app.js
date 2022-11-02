@@ -10,6 +10,7 @@ var studentRouter = require('./routes/student');
 var courseRouter = require('./routes/course');
 var gradeRouter = require('./routes/grade');
 var loginRouter = require('./routes/login');
+var studentgradeRouter = require('./routes/studentgrade');
 
 var app = express();
 
@@ -29,7 +30,7 @@ app.use('/users', usersRouter);
 app.use('/student', studentRouter);
 app.use('/course', courseRouter);
 app.use('/grade', gradeRouter);
-app.use('/login', loginRouter);
+app.use('/studentgrade', studentgradeRouter);
 
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
