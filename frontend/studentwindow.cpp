@@ -18,26 +18,18 @@ StudentWindow::~StudentWindow()
     delete ui;
 }
 
-const QString &StudentWindow::getWebToken() const
-{
-    return webToken;
-}
-
-void StudentWindow::setWebToken(const QString &newWebToken)
+void StudentWindow::setWebToken(const QByteArray &newWebToken)
 {
     webToken = newWebToken;
 }
 
 void StudentWindow::on_btnGrades_clicked()
 {
-    QString wb=this->getWebToken();
 
-    //qDebug()<<"webtoken="+wb;
     QString site_url=MyUrl::getBaseUrl()+"/studentgrade/"+myStudentId;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
-    //QByteArray myToken="Bearer "+this->getWebToken();
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    request.setRawHeader(QByteArray("Authorization"),(webToken));
     //WEBTOKEN LOPPU
     gradeManager = new QNetworkAccessManager(this);
 
@@ -68,3 +60,41 @@ void StudentWindow::gradeSlot(QNetworkReply *reply)
     gradeManager->deleteLater();
 }
 
+
+void StudentWindow::on_btnMyData_clicked()
+{
+    QString site_url=MyUrl::getBaseUrl()+"/student/"+myStudentId;
+    QNetworkRequest request((site_url));
+    qDebug()<<site_url;
+    //WEBTOKEN ALKU
+    request.setRawHeader(QByteArray("Authorization"),(webToken));
+    //WEBTOKEN LOPPU
+    dataManager = new QNetworkAccessManager(this);
+
+    connect(dataManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(dataSlot(QNetworkReply*)));
+
+    reply = dataManager->get(request);
+}
+
+
+
+void StudentWindow::dataSlot(QNetworkReply *reply)
+{
+    //qDebug()<<reply->readAll();
+    QByteArray response_data=reply->readAll();
+    QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
+    QJsonObject json_obj = json_doc.object();
+    QString myData="";
+    myData=json_obj["id_student"].toString()+"\r\n"+json_obj["fname"].toString()+"\r\n"+json_obj["lname"].toString();
+
+
+    qDebug()<<myData;
+
+    ui->textData->setText(myData);
+    ui->editFname->setText(json_obj["fname"].toString());
+    ui->editLname->setText(json_obj["lname"].toString());
+
+
+    reply->deleteLater();
+    dataManager->deleteLater();
+}

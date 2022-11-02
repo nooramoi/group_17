@@ -61,12 +61,13 @@ void MainWindow::loginSlot(QNetworkReply *reply)
             }
             else {
                 objectStudentWindow=new StudentWindow(id_student);
-                objectStudentWindow->setWebToken(response_data);
+                objectStudentWindow->setWebToken("Bearer "+response_data);
                 objectStudentWindow->show();
             }
         }
     }
-
+    reply->deleteLater();
+    loginManager->deleteLater();
 
 }
 
