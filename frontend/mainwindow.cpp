@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete objectStudentWindow;
+    objectStudentWindow=nullptr;
 }
 
 
@@ -43,15 +45,28 @@ void MainWindow::loginSlot(QNetworkReply *reply)
     qDebug()<<response_data;
     int test=QString::compare(response_data,"false");
     qDebug()<<test;
-    if(test==0){
-        ui->textIdStudent->clear();
-        ui->textPassword->clear();
-        ui->labelInfo->setText("Tunnus ja salasana eivät täsmää");
+
+    if(response_data.length()==0){
+        ui->labelInfo->setText("Palvelin ei vastaa");
     }
     else {
-        objectStudentWindow=new StudentWindow(id_student);
-        objectStudentWindow->setWebToken(response_data);
-        objectStudentWindow->show();
+        if(QString::compare(response_data,"-4078")==0){
+            ui->labelInfo->setText("Virhe tietokanta yhteydessä");
+        }
+        else {
+            if(test==0){
+                ui->textIdStudent->clear();
+                ui->textPassword->clear();
+                ui->labelInfo->setText("Tunnus ja salasana eivät täsmää");
+            }
+            else {
+                objectStudentWindow=new StudentWindow(id_student);
+                objectStudentWindow->setWebToken(response_data);
+                objectStudentWindow->show();
+            }
+        }
     }
+
+
 }
 
