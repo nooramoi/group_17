@@ -12,7 +12,7 @@ router.post('/',
       const password = request.body.password;
         student.checkPassword(id_student, function(dbError, dbResult) {
           if(dbError){
-            response.json(dbError);
+            response.json(dbError.errno);
           }
           else{
             if (dbResult.length > 0) {
