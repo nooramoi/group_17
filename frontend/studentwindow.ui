@@ -67,6 +67,16 @@
     <string>Tietoni</string>
    </property>
   </widget>
+  <widget class="QTextEdit" name="textGrades">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>160</y>
+     <width>201</width>
+     <height>251</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
