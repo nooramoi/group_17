@@ -16,6 +16,8 @@ StudentWindow::StudentWindow(QString id_student, QWidget *parent) :
 StudentWindow::~StudentWindow()
 {
     delete ui;
+    delete objectStudentEdit;
+    objectStudentEdit=nullptr;
 }
 
 void StudentWindow::setWebToken(const QByteArray &newWebToken)
@@ -65,7 +67,7 @@ void StudentWindow::on_btnMyData_clicked()
 {
     QString site_url=MyUrl::getBaseUrl()+"/student/"+myStudentId;
     QNetworkRequest request((site_url));
-    qDebug()<<site_url;
+    //qDebug()<<site_url;
     //WEBTOKEN ALKU
     request.setRawHeader(QByteArray("Authorization"),(webToken));
     //WEBTOKEN LOPPU
@@ -84,17 +86,22 @@ void StudentWindow::dataSlot(QNetworkReply *reply)
     QByteArray response_data=reply->readAll();
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonObject json_obj = json_doc.object();
-    QString myData="";
-    myData=json_obj["id_student"].toString()+"\r\n"+json_obj["fname"].toString()+"\r\n"+json_obj["lname"].toString();
 
+    fname=json_obj["fname"].toString();
+    lname=json_obj["lname"].toString();
 
-    qDebug()<<myData;
+    QString myData=myStudentId+"\r\n"+fname+"\r\n"+lname;
 
     ui->textData->setText(myData);
-    ui->editFname->setText(json_obj["fname"].toString());
-    ui->editLname->setText(json_obj["lname"].toString());
-
-
+    ui->btnUpdate->setEnabled(true);
     reply->deleteLater();
     dataManager->deleteLater();
 }
+
+void StudentWindow::on_btnUpdate_clicked()
+{
+    objectStudentEdit=new StudentEdit(webToken,fname,lname,myStudentId);
+    objectStudentEdit->show();
+
+}
+
