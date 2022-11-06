@@ -26,6 +26,7 @@ router.get('/:id?',
 
 router.post('/', 
 function(request, response) {
+  console.log(request.body);
   student.add(request.body, function(err, dbResult) {
     if (err) {
       response.json(err);

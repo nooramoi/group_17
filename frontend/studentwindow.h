@@ -1,6 +1,8 @@
 #ifndef STUDENTWINDOW_H
 #define STUDENTWINDOW_H
 
+#include "studentedit.h"
+
 #include <QDialog>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
@@ -30,6 +32,8 @@ private slots:
 
     void on_btnMyData_clicked();
 
+    void on_btnUpdate_clicked();
+
 private:
     Ui::StudentWindow *ui;
     QByteArray webToken;
@@ -39,6 +43,11 @@ private:
     QNetworkAccessManager *dataManager;
     QNetworkReply *reply;
     QByteArray response_data;
+
+    QString fname;
+    QString lname;
+
+    StudentEdit *objectStudentEdit;
 };
 
 #endif // STUDENTWINDOW_H

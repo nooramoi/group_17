@@ -13,15 +13,18 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     myurl.cpp \
+    studentedit.cpp \
     studentwindow.cpp
 
 HEADERS += \
     mainwindow.h \
     myurl.h \
+    studentedit.h \
     studentwindow.h
 
 FORMS += \
     mainwindow.ui \
+    studentedit.ui \
     studentwindow.ui
 
 # Default rules for deployment.
